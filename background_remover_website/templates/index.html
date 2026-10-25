@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClearCut — AI Background Remover</title>
+  <meta name="description" content="Remove image backgrounds in seconds with ClearCut.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <nav class="topbar">
+    <a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span><span></span></span> clearcut<span class="brand-dot">.</span></a>
+    <div class="nav-right"><span class="status-dot"></span><span>AI image studio</span></div>
+  </nav>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="sparkle">✦</span> YOUR IMAGE, REIMAGINED</div>
+      <h1>Backgrounds out.<br><span>Brilliance in.</span></h1>
+      <p class="hero-copy">Remove image backgrounds in seconds. Clean edges, transparent PNGs, and no design skills required.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="upload-panel" id="dropzone">
+        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" hidden>
+        <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2>Drop your image here</h2>
+        <p>or <button class="text-button" id="browseBtn" type="button">browse files</button> from your device</p>
+        <button class="primary-btn" id="chooseBtn" type="button">Choose an image <span>↗</span></button>
+        <div class="file-hints"><span>PNG</span><span>JPG</span><span>WEBP</span><i></i><span>Up to 15 MB</span></div>
+      </div>
+
+      <div class="preview-panel hidden" id="previewPanel">
+        <div class="preview-heading"><div><span class="tiny-label">YOUR IMAGE</span><h2>Ready to cut out</h2></div><button class="ghost-btn" id="changeBtn" type="button">Change image</button></div>
+        <div class="image-preview checkerboard"><img id="sourcePreview" alt="Selected image preview"></div>
+        <div class="selected-file"><span class="file-symbol">▧</span><span id="fileName">image.png</span><span id="fileSize"></span></div>
+        <button class="primary-btn wide" id="removeBtn" type="button">Remove background <span>✦</span></button>
+      </div>
+
+      <div class="result-panel hidden" id="resultPanel">
+        <div class="preview-heading"><div><span class="tiny-label">THE RESULT</span><h2>Look at that clean cut.</h2></div><button class="ghost-btn" id="startOverBtn" type="button">Start over ↻</button></div>
+        <div class="compare-grid">
+          <div class="compare-card"><div class="compare-label">ORIGINAL</div><div class="compare-image"><img id="originalResult" alt="Original image"></div></div>
+          <div class="compare-card"><div class="compare-label">BACKGROUND REMOVED <span class="mini-check">✓</span></div><div class="compare-image checkerboard"><img id="resultImage" alt="Background removed result"></div></div>
+        </div>
+        <button class="primary-btn wide" id="downloadBtn" type="button">Download transparent PNG <span>↓</span></button>
+        <p class="privacy-note">✓ Transparent PNG · Ready for your next design</p>
+      </div>
+
+      <div class="progress-panel hidden" id="progressPanel">
+        <div class="loader"></div><h2>Making the background disappear…</h2><p>Our AI is finding the subject and refining the edges.</p>
+        <div class="progress-track"><span></span></div>
+        <small>This can take a little longer on the first run.</small>
+      </div>
+      <div class="error-message hidden" id="errorMessage" role="alert"></div>
+    </section>
+
+    <section class="features">
+      <div class="feature"><div class="feature-icon">✧</div><div><h3>AI-powered cutouts</h3><p>Detects your subject automatically.</p></div></div>
+      <div class="feature"><div class="feature-icon">▦</div><div><h3>True transparency</h3><p>Download as a transparent PNG.</p></div></div>
+      <div class="feature"><div class="feature-icon">↗</div><div><h3>Simple by design</h3><p>Upload, remove, download. Done.</p></div></div>
+    </section>
+    <footer><span>© 2026 ClearCut Studio</span><span>Made for your creative workflow <b>✦</b></span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
