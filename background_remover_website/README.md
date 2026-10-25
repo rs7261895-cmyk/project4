@@ -1,58 +1,22 @@
-# ClearCut — Python Background Remover Website
+# ClearCut — Render-ready Python Background Remover
 
-A responsive Flask website that removes image backgrounds using `rembg` and returns a transparent PNG.
+Flask + rembg application configured for a persistent Python web service. Vercel serverless functions are not a good fit for the roughly 474 MB dependency bundle and memory-heavy ONNX model used by `rembg`.
 
-## Requirements
-- Python 3.10–3.12 recommended
-- Internet connection for the first setup/model download
-- Around 2–4 GB free RAM is recommended for local AI processing
+## Deploy on Render
 
-## Windows setup (PowerShell)
+1. Push this folder's contents to a GitHub repository (or use the existing repository and replace the project files).
+2. In Render, choose **New + → Web Service**, connect the GitHub repository.
+3. If these files are inside `background_remover_website`, set **Root Directory** to `background_remover_website`; otherwise leave it blank.
+4. Runtime: Python. Build command: `pip install -r requirements.txt`.
+5. Start command: `gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 180`.
+6. Use a service with sufficient RAM for ONNX Runtime (at least 2 GB recommended). First image request may be slower because the model must download.
+7. After deploy, open `/health`; it should return `{"status":"ok"}`.
 
-1. Extract this ZIP.
-2. Open PowerShell inside the extracted `background_remover_website` folder.
-3. Create a virtual environment:
-
-   ```powershell
-   py -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-
-   If script execution is blocked in PowerShell, use Command Prompt instead:
-   ```bat
-   .venv\Scripts\activate.bat
-   ```
-
-4. Install dependencies:
-
-   ```powershell
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
-
-5. Start the website:
-
-   ```powershell
-   python app.py
-   ```
-
-6. Open `http://127.0.0.1:5000` in your browser.
-
-## Linux Mint / Ubuntu setup
+## Local run
 
 ```bash
-cd background_remover_website
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 python app.py
 ```
 
-Then open `http://127.0.0.1:5000`.
-
-## Notes
-- Supported formats: PNG, JPG/JPEG, WEBP.
-- Maximum upload size: 15 MB.
-- The first background-removal run may take longer because the AI model may need to download.
-- This is a local development server. Do not expose it publicly as-is; use production hosting and add appropriate security controls before deployment.
+Supported formats: PNG, JPG/JPEG, WEBP. Maximum upload size: 15 MB.
