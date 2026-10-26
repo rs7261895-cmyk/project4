@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f1e9">
+  <meta name="description" content="ClearCut Studio removes image backgrounds and exports clean transparent PNGs.">
+  <title>ClearCut Studio — Make the subject stand out</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="ClearCut Studio home"><span class="brand-icon">cc</span><span>clearcut<span class="brand-light"> studio</span></span></a>
+  <div class="top-note"><span class="pulse"></span> PRIVATE IMAGE WORKSPACE <span class="version">01 / 26</span></div>
+</header>
+<main class="layout">
+  <section class="intro">
+    <p class="kicker"><span>✳</span> THE BACKGROUND, OUT OF THE WAY</p>
+    <h1>Make your<br>subject <em>stand out.</em></h1>
+    <p class="intro-copy">One image in. A clean, transparent cutout out. Ready for your shop, socials, portfolio, or next big idea.</p>
+    <div class="steps"><div class="step active"><b>01</b><span>Upload</span></div><i></i><div class="step"><b>02</b><span>Cut out</span></div><i></i><div class="step"><b>03</b><span>Export</span></div></div>
+  </section>
+
+  <section class="studio" aria-label="Background removal workspace">
+    <div class="studio-head"><div><span class="micro">WORKSPACE / 001</span><h2>Image cutout</h2></div><span class="pill"><span class="pill-dot"></span> AI TOOL</span></div>
+    <div id="dropzone" class="dropzone">
+      <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" hidden>
+      <div class="orbit" aria-hidden="true"><div class="orbit-inner">↑</div><span class="orbit-star">✳</span></div>
+      <h3>Drop an image to begin</h3>
+      <p>Drag it here, or browse your device.</p>
+      <button class="button button-dark" id="chooseBtn" type="button">Choose image <span>↗</span></button>
+      <div class="file-types"><span>PNG</span><span>JPG</span><span>WEBP</span><i></i>12 MB max</div>
+    </div>
+    <div id="previewPanel" class="preview-panel hidden">
+      <div class="section-row"><div><span class="micro">STEP 01 / INPUT</span><h3>Ready for a clean cut</h3></div><button class="button button-light" id="changeBtn" type="button">Change ↻</button></div>
+      <div class="preview-frame checker"><img id="sourcePreview" alt="Selected image preview"></div>
+      <div class="file-line"><span class="file-glyph">▧</span><span id="fileName">image.png</span><span id="fileSize"></span></div>
+      <button class="button button-lime full" id="removeBtn" type="button">Remove background <span>↗</span></button>
+    </div>
+    <div id="progressPanel" class="progress-panel hidden" aria-live="polite">
+      <div class="processing-mark"><span></span><span></span><span></span></div><span class="micro">STEP 02 / PROCESSING</span>
+      <h3>Finding the edges.</h3><p>First run can take a little longer while the AI engine warms up.</p>
+      <div class="progress-track"><span></span></div><small>Please keep this tab open.</small>
+    </div>
+    <div id="resultPanel" class="result-panel hidden">
+      <div class="section-row"><div><span class="micro">STEP 03 / FINISHED</span><h3>Clean cut. Your turn.</h3></div><button class="button button-light" id="startOverBtn" type="button">New image +</button></div>
+      <div class="compare-grid">
+        <div class="compare-card"><div class="compare-label">BEFORE <span>01</span></div><div class="compare-image"><img id="originalResult" alt="Original image"></div></div>
+        <div class="compare-card"><div class="compare-label">AFTER <span class="green-text">● PNG</span></div><div class="compare-image checker"><img id="resultImage" alt="Transparent background result"></div></div>
+      </div>
+      <button class="button button-lime full" id="downloadBtn" type="button">Download transparent PNG <span>↓</span></button>
+      <p class="success-note">✳ Transparent background · Full-size PNG export</p>
+    </div>
+    <div id="errorMessage" class="error-message hidden" role="alert"></div>
+    <div class="studio-foot"><span>✳ Images are processed by the server</span><span>PNG OUTPUT</span></div>
+  </section>
+
+  <section class="bottom-strip">
+    <div class="bottom-title"><span class="micro">MADE FOR THE MAKERS</span><h2>Less cleanup.<br><em>More creating.</em></h2></div>
+    <div class="benefit"><span class="benefit-num">01</span><div><h3>Subject-first AI</h3><p>Automatically isolates the main subject from its surroundings.</p></div></div>
+    <div class="benefit"><span class="benefit-num">02</span><div><h3>Real transparency</h3><p>Export a PNG with an alpha channel, ready for any design.</p></div></div>
+    <div class="benefit"><span class="benefit-num">03</span><div><h3>No design detour</h3><p>Upload, process, download. Keep your workflow moving.</p></div></div>
+  </section>
+  <footer><span>© 2026 CLEARCUT STUDIO</span><span>MAKE SPACE FOR THE SUBJECT <b>✳</b></span></footer>
+</main>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body></html>

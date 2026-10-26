@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: clearcut-studio
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt && U2NET_HOME=.u2net python -c "from rembg import new_session; new_session('u2netp')"
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 240 --max-requests 50 --max-requests-jitter 5
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: REMBG_MODEL
+        value: u2netp
+      - key: U2NET_HOME
+        value: .u2net
+      - key: MAX_IMAGE_EDGE
+        value: 1280
+      - key: MAX_UPLOAD_MB
+        value: 12
